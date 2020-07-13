@@ -11,6 +11,9 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "diagnostics":true,
+    // any运行访问未存在属性
+    // "suppressImplicitAnyIndexErrors":true,
     "types": [
       "webpack-env"
     ],

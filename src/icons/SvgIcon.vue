@@ -1,7 +1,5 @@
-//SvgIcon组件代码
-
 <template>
-  <svg :class="svgClass" aria-hidden="true">
+  <svg :class="svgClass" aria-hidden="true" :style="style" >
     <use :xlink:href="iconName"/>
   </svg>
 </template>
@@ -17,7 +15,11 @@ export default {
     className: {
       type: String,
       default: ''
-    }
+    },
+    size:{
+      type:String,
+      default:'32px'
+    },
   },
   computed: {
     iconName() {
@@ -29,6 +31,9 @@ export default {
       } else {
         return 'svg-icon'
       }
+    },
+    style(){
+      return `width:${this.size};height:${this.size}`
     }
   }
 }
