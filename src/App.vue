@@ -23,16 +23,7 @@ import Aside from "@/components/aside/index.vue";
   }
 })
 export default class Home extends Vue {
-  created() {
-    request("/login/cellphone", {
-      params: {
-        phone: "18428053612",
-        password: "123abc"
-      }
-    }).then(res => {
-      console.log(res);
-    });
-  }
+ 
 }
 </script>
 

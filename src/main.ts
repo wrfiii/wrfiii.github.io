@@ -5,9 +5,9 @@ import store from './store'
 
 
 import './icons/index.js'
-import elDialog from '@/components/dialog.vue'
-// Vue.use(elDialog);
-Vue.component('el-dialog', elDialog); //初始化
+// import elDialog from '@/components/dialog.vue'
+// // Vue.use(elDialog);
+// Vue.component('el-dialog', elDialog); //初始化
 
 
 new Vue({
