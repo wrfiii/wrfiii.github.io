@@ -1,8 +1,8 @@
 <template>
   <div class="avater">
-    <div v-if="isLogin">
-      <img :src="avater" alt />
-      <span>魔魔魔魔魔魔i</span>
+    <div v-if="isLogin" class="avater">
+      <img :src="avatarUrl" alt />
+      <span>{{nickname}}</span>
       <svg-icon icon-class="vip" class="vip-icon" size="22px" style="margin-left:3px"></svg-icon>
     </div>
     <div v-else class="no-login">
@@ -11,7 +11,13 @@
     <Dialog :switch="switchbtn" :styleText="styleText">
       <div slot class="login-from login-box">
         <h2>Login</h2>
-        <svg-icon icon-class="close" class="close-icon" size="18px" style="margin-left:3px" @click.native="closeDialog"></svg-icon>
+        <svg-icon
+          icon-class="close"
+          class="close-icon"
+          size="18px"
+          style="margin-left:3px"
+          @click.native="closeDialog"
+        ></svg-icon>
         <form>
           <div class="user-box">
             <input type="text" name required v-model="phone" />
@@ -48,15 +54,19 @@ import request from "@/api/request";
 export default class RightBtn extends Vue {
   switchbtn = false;
   styleText = "position:fixed;left:35vw;top:20vh;width:30vw;height: 50vh;";
-  phone = "";
-  password = "";
-  get avater() {
+  phone = "18428053612";
+  password = "123abc";
+  get avatarUrl() {
     return (
-      this.$store.getters.avater || require("../../../assets/imgs/avater.jpg")
+      this.$store.getters.avatarUrl ||
+      require("../../../assets/imgs/avater.jpg")
     );
   }
   get isLogin() {
-    return false;
+    return this.nickname !== "" && this.avatarUrl !== "";
+  }
+  get nickname() {
+    return this.$store.getters.nickname;
   }
   changeSwich() {
     this.switchbtn = !this.switchbtn;
@@ -68,13 +78,21 @@ export default class RightBtn extends Vue {
         password: this.password
       }
     }).then(res => {
-      console.log(res);
+      request("/user/detail", {
+        params: {
+          uid: (res as any).account.id
+        }
+      }).then(res => {
+        this.$store.commit("user/M_USERINFO", res);
+        console.log(this.nickname);
+        console.log(this.avatarUrl);
+        this.switchbtn = false;
+      });
     });
   }
-  closeDialog(){
+  closeDialog() {
     console.log(123);
-    
-    this.switchbtn=false
+    this.switchbtn = false;
   }
 }
 </script>
@@ -85,6 +103,7 @@ export default class RightBtn extends Vue {
   align-items: center;
   margin-right: 20px;
   position: relative;
+  cursor: pointer;
   img {
     height: 28px;
     border-radius: 50%;
@@ -94,6 +113,7 @@ export default class RightBtn extends Vue {
     margin-left: 8px;
     color: rgba(255, 255, 255, 0.8);
     font-weight: 300;
+    margin-right: 4px;
   }
   .vip-icon {
     border-top-left-radius: 2px;
@@ -113,7 +133,7 @@ export default class RightBtn extends Vue {
       transition: all 0.7s 0.5s;
       cursor: pointer;
       &:hover {
-        transform: rotate(360deg)  scale(1.1);
+        transform: rotate(360deg) scale(1.1);
       }
     }
   }
@@ -141,6 +161,7 @@ export default class RightBtn extends Vue {
   box-sizing: border-box;
   box-shadow: 0 10px 18px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
+  opacity: 0.8;
   input {
     font-weight: bold;
     text-indent: 8px;

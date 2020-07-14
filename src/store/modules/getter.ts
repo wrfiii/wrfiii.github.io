@@ -3,8 +3,8 @@
 const getters = {
     token: (state: any) => state.user.token,
 
-    avater: (state: any) => state.user.avater,
+    avatarUrl: (state: any) => state.user.avatarUrl,
 
-    name: (state: any) => state.user.name,
+    nickname: (state: any) => state.user.nickname,
 };
 export default getters 

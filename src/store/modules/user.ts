@@ -1,25 +1,37 @@
 interface User {
-    name: string;
+    nickname: string;
     isLogin: boolean;
     isVip: boolean;
     level: number;
-    avater: string;
+    avatarUrl: string;
     token: string;
+    userId: number;
 }
 
 const state: User = {
-    name: '',
+    nickname: '',
     isLogin: false,
     isVip: false,
     level: 0,
-    avater: '',
-    token: ''
+    avatarUrl: '',
+    token: '',
+    userId: 0
 }
 
 const mutations = {
+    M_USERINFO: (state: User, val: any) => {
+        const { level } = val;
+        const { avatarUrl, nickname, userId } = val.profile;
+        state.level = level;
+        state.avatarUrl = avatarUrl;
+        state.nickname = nickname;
+        state.userId = userId;
+    }
 }
 
 const actions = {
+
+
 }
 
 export default {
@@ -27,6 +39,6 @@ export default {
     state,
     mutations,
     actions
-}   
+}
 
 

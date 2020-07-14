@@ -5,7 +5,9 @@
       <aside class="aside">
         <Aside />
       </aside>
-      <main class="main"></main>
+      <main class="main">
+        <router-view></router-view>
+      </main>
     </section>
   </div>
 </template>
@@ -22,9 +24,7 @@ import Aside from "@/components/aside/index.vue";
     Aside
   }
 })
-export default class Home extends Vue {
- 
-}
+export default class Home extends Vue {}
 </script>
 
 <style>
