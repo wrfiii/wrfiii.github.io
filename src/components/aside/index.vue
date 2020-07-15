@@ -35,7 +35,7 @@ export default class HelloWorld extends Vue {
     {
       iconClass: "music",
       title: "发现音乐",
-      route: "find",
+      route: "index",
       active: false
     },
     {

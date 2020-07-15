@@ -1,8 +1,10 @@
 <template>
   <div class="container">
-    <carousel-3d>
+    <carousel-3d :cont="bannerImgs.length" :autoplay="true" bias="right" :border="0" height='200' width='666' >
       <slide :index="index" v-for="(item, index) in bannerImgs" :key="index">
-        <img :src="item.imageUrl" alt="">
+        <div class="silde-content">
+          <img :src="item.imageUrl" alt />
+        </div>
       </slide>
     </carousel-3d>
   </div>
@@ -19,30 +21,34 @@ import { Carousel3d, Slide } from "vue-carousel-3d";
 })
 export default class Banner extends Vue {
   bannerImgs = [];
+  styleText='calc(100vw - var(--asideWidth) - 72 / 5  )'
+  mounted() {
+    this.getBanner();
+    this.$nextTick(() => {
+      console.log(this.bannerImgs);
+    });
+  }
   getBanner() {
     (this as any)._requst("/banner").then((v: any) => {
-     this.bannerImgs=v.banners.map((v: any) => {
+      this.bannerImgs = v.banners.map((v: any) => {
         return {
           imageUrl: v.imageUrl,
           url: v.url
         };
       });
-       console.log(this.bannerImgs);
     });
-   
-  }
-  created() {
-    this.getBanner();
   }
 }
 </script>
 
-<style scoped>
-.carousel-3d-slide {
-      height: auto !important;
-      background-color: rgba(0, 0, 0, 0.25) !important;
-    }
-    .container{
-      width: 100%;
-    }
+<style lang="css">
+.carousel-3d-slide ,.silde-content{
+  border: none !important;
+  background-color:transparent !important;
+  border-bottom-color: transparent !important;
+  height: 100% !important;
+}
+.carousel-3d-slide img{
+  height: 100% !important;
+}
 </style>

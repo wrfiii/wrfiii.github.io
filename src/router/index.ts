@@ -6,9 +6,10 @@ Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
   {
-    path: 'find',
-    name: 'find',
+    path: '/',
+    name: 'index',
     component: () => import(/* webpackChunkName: "about" */ '../views/find/index.vue'),
+    redirect:'individuality',
     children: [
       {
         path: 'individuality',

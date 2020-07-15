@@ -6,7 +6,9 @@
         <Aside />
       </aside>
       <main class="main">
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </main>
     </section>
   </div>
@@ -50,5 +52,7 @@ main.main {
    */
   flex: 1;
   height: 100%;
+  height: calc(100vh - var(--topNavHeight));
+  overflow-y: auto;
 }
 </style>

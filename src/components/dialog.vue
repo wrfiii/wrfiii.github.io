@@ -13,9 +13,6 @@ export default class Dialog extends Vue {
   get switchBtn() {
     return this.switch;
   }
-  mounted() {
-    console.log(this.switchBtn);
-  }
 }
 </script>
 

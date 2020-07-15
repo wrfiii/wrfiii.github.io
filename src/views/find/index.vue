@@ -1,23 +1,29 @@
 <template>
   <div class="find-container" ref="find_container" id="find">
     <ul>
-      <li v-for="(item, index) in nav" :key="index">
+      <li v-for="(item, index) in nav" :key="index"  @click="changeView(index,item.route)">
         <input type="radio" name="active" :id="'f_'+index" />
         <label
           :for="'f_'+index"
           :nav-index="index"
-          @click="changeView(index,item.route)"
         >{{item.name}}</label>
       </li>
     </ul>
-    <router-view></router-view>
+    <BorderLine />
+      <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import requst from "@/api/request";
 import { Component, Vue } from "vue-property-decorator";
-@Component({})
+import BorderLine from "@/components/line.vue";
+
+@Component({
+  components: {
+    BorderLine
+  }
+})
 export default class Find extends Vue {
   nav = [
     {
@@ -61,16 +67,19 @@ export default class Find extends Vue {
     line-height: 58px;
     font-weight: 500;
     justify-content: center;
-    border-bottom: 1px solid #c6c6c6;
     position: relative;
     &::after {
       position: absolute;
       left: 0;
       bottom: 0;
       width: 88px;
-      height: 1px;
+      height: 2px;
       content: "";
       display: block;
+      border-top-left-radius: 1px;
+      border-top-right-radius: 1px;
+      border-bottom-left-radius: 1px;
+      border-bottom-right-radius: 1px;
       background-color: var(--backColor);
       left: calc(50% - 88px * 6 / 2 + var(--navIndex) * 88px);
       transition: all 0.3s ease-in-out;
@@ -95,5 +104,9 @@ export default class Find extends Vue {
       }
     }
   }
+}
+.route-view {
+  height: calc(100vh - var(--topNavHeight));
+  overflow-y: auto;
 }
 </style>
