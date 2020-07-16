@@ -26,6 +26,7 @@ const mutations = {
         state.avatarUrl = avatarUrl;
         state.nickname = nickname;
         state.userId = userId;
+        localStorage.setItem("userState", JSON.stringify(val));
     }
 }
 

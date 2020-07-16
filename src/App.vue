@@ -11,6 +11,7 @@
         </keep-alive>
       </main>
     </section>
+    <Palyer/>
   </div>
 </template>
 <script lang='ts'>
@@ -20,10 +21,13 @@ import "./assets/styles/base.css";
 import request from "@/api/request";
 import Header from "@/components/header/index.vue";
 import Aside from "@/components/aside/index.vue";
+import Palyer from '@/components/palyer/index.vue'
+
 @Component({
   components: {
     Header,
-    Aside
+    Aside,
+    Palyer
   }
 })
 export default class Home extends Vue {}
@@ -35,6 +39,8 @@ export default class Home extends Vue {}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  height: 100vh;
+  overflow: hidden;
 }
 section.coantainer {
   width: 100%;
@@ -48,11 +54,10 @@ aside.aside {
   border-right: 1px solid rgb(225, 225, 226);
 }
 main.main {
-  /* width: calc(100vw - 200px);
-   */
   flex: 1;
-  height: 100%;
   height: calc(100vh - var(--topNavHeight));
   overflow-y: auto;
+  padding-bottom: var(--playerHeight);
+  box-sizing: border-box;
 }
 </style>

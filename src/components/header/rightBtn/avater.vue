@@ -68,6 +68,15 @@ export default class RightBtn extends Vue {
   get nickname() {
     return this.$store.getters.nickname;
   }
+  mounted() {
+    if (localStorage.getItem("userState")) {
+      this.$store.commit(
+        "user/M_USERINFO",
+        JSON.parse(localStorage.getItem("userState")as any)
+      );
+    }
+  }
+
   changeSwich() {
     this.switchbtn = !this.switchbtn;
   }
@@ -84,14 +93,11 @@ export default class RightBtn extends Vue {
         }
       }).then(res => {
         this.$store.commit("user/M_USERINFO", res);
-        console.log(this.nickname);
-        console.log(this.avatarUrl);
         this.switchbtn = false;
       });
     });
   }
   closeDialog() {
-    console.log(123);
     this.switchbtn = false;
   }
 }

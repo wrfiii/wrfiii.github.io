@@ -24,9 +24,6 @@ export default class Banner extends Vue {
   styleText='calc(100vw - var(--asideWidth) - 72 / 5  )'
   mounted() {
     this.getBanner();
-    this.$nextTick(() => {
-      console.log(this.bannerImgs);
-    });
   }
   getBanner() {
     (this as any)._requst("/banner").then((v: any) => {
